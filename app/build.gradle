@@ -22,6 +22,27 @@ android {
     }
 }
 
+sonarqube {
+    properties {
+
+        property "sonar.host.url", "localhost:9000"
+        property "sonar.username", "admin"
+        property "sonar.password", "admin"
+
+        property "sonar.projectKey", "myjenkinsapp"
+        property "sonar.projectName", "My Cool Jenkins Application"
+        property "sonar.projectVersion", "1.0"
+
+        property "sonar.sources", "src/main/java"
+        property "sonar.tests", "src/test/java"
+
+        property "sonar.java.coveragePlugin", "jacoco"
+        property "sonar.jacoco.reportPaths", "build/jacoco/testDebugUnitTest.exec"
+        property 'sonar.jacoco.itReportPaths', "build/outputs/code-coverage/connected/*.ec"
+        property "sonar.junit.reportsPath", "build/test-results/testDebugUnitTest"
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'

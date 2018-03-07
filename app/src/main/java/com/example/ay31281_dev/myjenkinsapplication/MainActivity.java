@@ -26,6 +26,15 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        MyClass myClass = new MyClass("toto");
+
+        if(myClass != null) {
+            String text = myClass.whatsTheText();
+        } else {
+            String text = myClass.toString();
+        }
+
     }
 
     @Override
