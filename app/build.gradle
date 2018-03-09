@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
-apply from: '../sonarqube.gradle'
+
 
 android {
     compileSdkVersion 26
@@ -19,6 +19,44 @@ android {
         }
         debug {
             testCoverageEnabled true
+        }
+        all { buildType ->
+
+            task "combineTest${buildType.name.capitalize()}Results"  {
+
+                group = "Reporting"
+                description = "Move the unit tests and instrumented tests of the ${buildType.name.capitalize()} variant in one directory only."
+
+                def modules = ["app"]
+
+                doLast {
+                    modules.each { module ->
+                        File combined = file("${project.buildDir}/combined-test-results/${buildType.name}")
+                        if (combined.exists()) {
+                            combined.deleteDir()
+                        }
+                        combined.mkdirs();
+
+                        def testDirs = [file("${project.buildDir}/test-results/test${buildType.name.capitalize()}UnitTest/"),
+                                        file("${project.buildDir}/outputs/androidTest-results/connected/")];
+                        testDirs.each { testDir ->
+                            if (!testDir.exists()) {
+                                logging.captureStandardOutput LogLevel.WARN
+                                println "WARNING: ignoring non-existant ${testDir.path}"
+                                return;
+                            }
+                            files(testDir.listFiles()).each { file ->
+                                if (file.isFile()) {
+                                    new File(combined, file.getName()) << file.text
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+
+            }
         }
     }
 }
@@ -41,9 +79,7 @@ sonarqube {
 
         property "sonar.jacoco.reportPaths", fileTree(dir: project.projectDir, includes: ["**/*.exec", "**/*.ec"])
 
-        //property "sonar.junit.reportsPath", "build/test-results/testDebugUnitTest"
-        //property "sonar.junit.reportsPath", "${project.buildDir}/outputs/androidTest-results/connected"
-        property "sonar.junit.reportsPath", "${project.buildDir}/combined-test-results"
+        property "sonar.junit.reportsPath", "${project.buildDir}/combined-test-results/debug"
     }
 }
 
@@ -56,3 +92,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
+
+
