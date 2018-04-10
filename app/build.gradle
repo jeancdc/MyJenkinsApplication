@@ -30,6 +30,10 @@ android {
                 def modules = ["app"]
 
                 doLast {
+
+                    println("project: " + project.projectDir)
+                    println("project: " + project.version)
+
                     modules.each { module ->
                         File combined = file("${project.buildDir}/combined-test-results/${buildType.name}")
                         if (combined.exists()) {
@@ -70,7 +74,10 @@ sonarqube {
 
         property "sonar.projectKey", "myjenkinsapp"
         property "sonar.projectName", "My Cool Jenkins Application"
-        property "sonar.projectVersion", "1.0"
+        property "sonar.projectVersion", "1.2"
+
+        property "sonar.java.binaries", "build/intermediates/classes/debug"
+        property "sonar.java.test.binaries", "build/intermediates/classes/debug"
 
         property "sonar.sources", "src/main/java"
         property "sonar.tests", "src/test/java, src/androidTest/java"
