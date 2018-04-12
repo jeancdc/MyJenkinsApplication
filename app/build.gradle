@@ -74,7 +74,7 @@ sonarqube {
 
         property "sonar.projectKey", "myjenkinsapp"
         property "sonar.projectName", "My Cool Jenkins Application"
-        property "sonar.projectVersion", "1.2"
+        property "sonar.projectVersion", 1.2
 
         property "sonar.java.binaries", "build/intermediates/classes/debug"
         property "sonar.java.test.binaries", "build/intermediates/classes/debug"
@@ -84,7 +84,8 @@ sonarqube {
 
         property "sonar.java.coveragePlugin", "jacoco"
 
-        property "sonar.jacoco.reportPaths", fileTree(dir: project.projectDir, includes: ["**/*.exec", "**/*.ec"])
+        //property "sonar.jacoco.reportPaths", fileTree(dir: project.projectDir, includes: ["**/*.exec", "**/*.ec"])
+        property "sonar.jacoco.reportPaths", "build/sonar/MyJenkinsApplication_app"
 
         //property "sonar.junit.reportsPath", "${project.buildDir}/combined-test-results/debug"
 
