@@ -85,7 +85,7 @@ sonarqube {
         property "sonar.java.coveragePlugin", "jacoco"
 
         //property "sonar.jacoco.reportPaths", fileTree(dir: project.projectDir, includes: ["**/*.exec", "**/*.ec"])
-        property "sonar.jacoco.reportPaths", "build/sonar/MyJenkinsApplication_app"
+        property "sonar.jacoco.reportPaths", "build/jacoco, build/outputs/code-coverage/connected"
 
         //property "sonar.junit.reportsPath", "${project.buildDir}/combined-test-results/debug"
 
