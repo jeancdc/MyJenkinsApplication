@@ -68,7 +68,7 @@ android {
 sonarqube {
     properties {
 
-        def libraries = project.android.sdkDirectory.getPath() + "/platforms/android-27/android.jar" + ", build/intermediates/classes-jar/debug/classes.jar"
+        def libraries = project.android.sdkDirectory.getPath() + "/platforms/android-27/android.jar" + ", build/intermediates/classes-jar/**/classes.jar"
 
         property "sonar.host.url", "localhost:9000"
         property "sonar.username", "admin"
