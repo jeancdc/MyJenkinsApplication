@@ -87,8 +87,8 @@ sonarqube {
         property "sonar.java.test.binaries", "app/build/intermediates/classes/debug"
         property "sonar.java.test.libraries", libraries
 
-        property "sonar.sources", "app/src/main/java, app/src/main/res"
-        property "sonar.tests", "app/src/test/java, app/src/androidTest/java"
+        property "sonar.sources", "src/main/java, src/main/res"
+        property "sonar.tests", "src/test/java, src/androidTest/java"
 
         property "sonar.java.coveragePlugin", "jacoco"
 
