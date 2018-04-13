@@ -6,3 +6,8 @@
 /build
 /captures
 .externalNativeBuild
+app/libs/
+app/modules/build/combined-test-results/
+app/other/build/combined-test-results/
+modules/
+other/
