@@ -71,34 +71,8 @@ android {
 sonarqube {
     properties {
 
-        //def libraries = project.android.sdkDirectory.getPath() + "/platforms/android-27/android.jar"
-
-        property "sonar.host.url", "localhost:9000"
-        property "sonar.username", "admin"
-        property "sonar.password", "admin"
-
-        property "sonar.projectKey", "com.example.ay31281_dev.myjenkinsapplication"
-        property "sonar.projectName", "My Jenkins Application"
-
-        property 'sonar.sourceEncoding', "UTF-8"
-
-        //property "sonar.binaries", "build/intermediates/classes/debug"
-        //property "sonar.libraries", libraries
-        //property "sonar.java.binaries", "build/intermediates/classes/debug"
-        //property "sonar.java.libraries", libraries
-        //property "sonar.java.test.binaries", "build/intermediates/classes/debug"
-        //property "sonar.java.test.libraries", libraries
-
-        //property "sonar.sources", "src/main/java, src/main/res"
-        //property "sonar.tests", "src/test/java, src/androidTest/java"
-
         property "sonar.modules", "app"
         property "app.sonar.projectBaseDir", "app"
-        property "app.sonar.projectName", "Module App"
-        property "app.sonar.sources", "src/main/java, src/main/res"
-        property "app.sonar.tests", "src/test/java, src/androidTest/java"
-
-        property "sonar.java.coveragePlugin", "jacoco"
 
         property "sonar.jacoco.reportPaths", fileTree(dir: project.projectDir, includes: ["build/jacoco/*.exec", "build/outputs/code-coverage/connected/*.ec"])
 
