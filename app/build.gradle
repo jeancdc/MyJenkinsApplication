@@ -79,7 +79,7 @@ sonarqube {
         property "sonar.java.binaries", "build/intermediates/classes/debug"
         property "sonar.java.test.binaries", "build/intermediates/classes/debug"
 
-        property "sonar.sources", "src/main/java"
+        property "sonar.sources", "src/main/java, src/main/res"
         property "sonar.tests", "src/test/java, src/androidTest/java"
 
         property "sonar.java.coveragePlugin", "jacoco"
