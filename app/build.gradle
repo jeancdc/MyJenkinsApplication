@@ -94,8 +94,8 @@ sonarqube {
 
         property "sonar.modules", "app"
         property "app.sonar.projectName", "Module App"
-        property "app.sonar.sources", "app/src/main/java, app/src/main/res"
-        property "app.sonar.tests", "app/src/test/java, app/src/androidTest/java"
+        property "app.sonar.sources", "src/main/java, src/main/res"
+        property "app.sonar.tests", "src/test/java, src/androidTest/java"
 
         property "sonar.java.coveragePlugin", "jacoco"
 
