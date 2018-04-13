@@ -71,8 +71,13 @@ android {
 sonarqube {
     properties {
 
-        property "sonar.modules", "app"
-        property "app.sonar.projectBaseDir", "app"
+        property "sonar.host.url", "localhost:9000"
+        property "sonar.username", "admin"
+        property "sonar.password", "admin"
+
+        property "sonar.projectName", "Module App"
+        property "sonar.sources", "src/main/java, src/main/res"
+        property "sonar.tests", "src/test/java, src/androidTest/java"
 
         property "sonar.jacoco.reportPaths", fileTree(dir: project.projectDir, includes: ["build/jacoco/*.exec", "build/outputs/code-coverage/connected/*.ec"])
 
