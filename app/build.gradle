@@ -93,6 +93,7 @@ sonarqube {
         //property "sonar.tests", "src/test/java, src/androidTest/java"
 
         property "sonar.modules", "app"
+        property "app.sonar.projectBaseDir", "app"
         property "app.sonar.projectName", "Module App"
         property "app.sonar.sources", "src/main/java, src/main/res"
         property "app.sonar.tests", "src/test/java, src/androidTest/java"
