@@ -73,6 +73,7 @@ sonarqube {
 
         property "sonar.projectKey", "com.example.ay31281_dev.myjenkinsapplication_app"
         property "sonar.projectName", "My App module"
+        property "sonar.projectVersion", ${project.version}
 
         property "sonar.sources", "src/main/java, src/main/res"
         property "sonar.tests", "src/test/java, src/androidTest/java"
