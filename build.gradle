@@ -34,7 +34,7 @@ task clean(type: Delete) {
 sonarqube {
     properties {
 
-        property "sonar.host.url", "localhost:9000"
+        property "sonar.host.url", "http://localhost:9000"
         property "sonar.username", "admin"
         property "sonar.password", "admin"
 
