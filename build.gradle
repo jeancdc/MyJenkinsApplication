@@ -40,7 +40,7 @@ sonarqube {
 
         property "sonar.projectKey", "com.example.ay31281_dev.myjenkinsapplication"
         property "sonar.projectName", "My Jenkins Application"
-        property "sonar.projectVersion", ${project.version}
+        property "sonar.projectVersion", 1.0
 
         property 'sonar.sourceEncoding', "UTF-8"
 
