@@ -38,7 +38,7 @@ sonarqube {
         property "sonar.username", "admin"
         property "sonar.password", "admin"
 
-        /*property "sonar.projectKey", "com.example.ay31281_dev.myjenkinsapplication"
+        property "sonar.projectKey", "com.example.ay31281_dev.myjenkinsapplication"
         property "sonar.projectName", "My Jenkins Application"
 
         property 'sonar.sourceEncoding', "UTF-8"
@@ -46,7 +46,7 @@ sonarqube {
         property "sonar.modules", "app"
         property "app.sonar.projectBaseDir", "app"
 
-        property "sonar.java.coveragePlugin", "jacoco"*/
+        property "sonar.java.coveragePlugin", "jacoco"
 
         //property "sonar.jacoco.reportPaths", fileTree(dir: project.projectDir, includes: ["build/jacoco/*.exec", "build/outputs/code-coverage/connected/*.ec"])
 
