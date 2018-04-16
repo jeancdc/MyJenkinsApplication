@@ -55,7 +55,7 @@ sonarqube {
 
         property "sonar.java.coveragePlugin", "jacoco"
 
-        property "sonar.exclusions", "**/R.class, **/R\$*.class, **/R.java, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*"
+        property "sonar.exclusions", "**/R.class, **/R\$*.class, **/R.java, **/BuildConfig.*, **/*Test*.*"
 
     }
 }
