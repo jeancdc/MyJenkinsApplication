@@ -75,12 +75,16 @@ sonarqube {
         property "sonar.username", "admin"
         property "sonar.password", "admin"
 
-        property "sonar.projectName", "Module App"
+        property 'sonar.sourceEncoding', "UTF-8"
+
+        property "sonar.projectKey", "com.example.ay31281_dev.myjenkinsapplication"
+        property "sonar.projectName", "My Jenkins Application"
+
         property "sonar.sources", "src/main/java, src/main/res"
         property "sonar.tests", "src/test/java, src/androidTest/java"
 
+        property "sonar.java.coveragePlugin", "jacoco"
         property "sonar.jacoco.reportPaths", fileTree(dir: project.projectDir, includes: ["build/jacoco/*.exec", "build/outputs/code-coverage/connected/*.ec"])
-
         property "sonar.junit.reportPaths", "build/test-results/testDebugUnitTest, build/outputs/androidTest-results/connected"
 
         property "sonar.android.lint.report", "build/reports/lint-results-debug.xml"

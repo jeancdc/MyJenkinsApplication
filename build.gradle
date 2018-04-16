@@ -31,7 +31,7 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-sonarqube {
+/*sonarqube {
     properties {
 
         //def libraries = project.android.sdkDirectory.getPath() + "/platforms/android-27/android.jar"
@@ -57,16 +57,16 @@ sonarqube {
 
         property "sonar.modules", "app"
         property "app.sonar.projectBaseDir", "app"
-        /*property "sonar.projectName", "Module App"
-        property "sonar.sources", "src/main/java, src/main/res"
-        property "sonar.tests", "src/test/java, src/androidTest/java"*/
+        //property "sonar.projectName", "Module App"
+        //property "sonar.sources", "src/main/java, src/main/res"
+        //property "sonar.tests", "src/test/java, src/androidTest/java"
 
         property "sonar.java.coveragePlugin", "jacoco"
 
-        /*property "sonar.jacoco.reportPaths", fileTree(dir: project.projectDir, includes: ["build/jacoco/*.exec", "build/outputs/code-coverage/connected/*.ec"])
+        //property "sonar.jacoco.reportPaths", fileTree(dir: project.projectDir, includes: ["build/jacoco/*.exec", "build/outputs/code-coverage/connected/*.ec"])
 
-        property "sonar.junit.reportPaths", "build/test-results/testDebugUnitTest, build/outputs/androidTest-results/connected"
+        //property "sonar.junit.reportPaths", "build/test-results/testDebugUnitTest, build/outputs/androidTest-results/connected"
 
-        property "sonar.android.lint.report", "build/reports/lint-results-debug.xml"*/
+        //property "sonar.android.lint.report", "build/reports/lint-results-debug.xml"
     }
-}
+}*/
