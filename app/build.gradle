@@ -71,11 +71,13 @@ android {
 sonarqube {
     properties {
 
-        property "sonar.host.url", "localhost:9000"
+        /*property "sonar.host.url", "localhost:9000"
         property "sonar.username", "admin"
-        property "sonar.password", "admin"
+        property "sonar.password", "admin"*/
 
         property 'sonar.sourceEncoding', "UTF-8"
+
+        property "sonar.exclusions", "**/BuildConfig.class,**/R.java,**/R\$*.java,src/main/gen/**/*,src/main/assets/**/*"
 
         property "sonar.projectKey", "com.example.ay31281_dev.myjenkinsapplication"
         property "sonar.projectName", "My Jenkins Application"
