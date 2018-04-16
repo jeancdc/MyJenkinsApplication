@@ -43,6 +43,7 @@ sonarqube {
 
         property 'sonar.sourceEncoding', "UTF-8"
 
+        property "sonar.modules.enabled", "true"
         property "sonar.modules", "app"
         property "app.sonar.projectBaseDir", "app"
 
