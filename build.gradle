@@ -50,7 +50,7 @@ sonarqube {
         property "sonar.java.coveragePlugin", "jacoco"
 
         //property "sonar.exclusions", "**/BuildConfig.class,**/R.java,**/R\$*.java,src/main/gen/**/*,src/main/assets/**/*"
-        property "sonar.exclusions", "**/R.class, **/R\$*.class, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*"
+        //property "sonar.exclusions", "**/R.class, **/R\$*.class, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*"
 
         //property "sonar.jacoco.reportPaths", fileTree(dir: project.projectDir, includes: ["build/jacoco/*.exec", "build/outputs/code-coverage/connected/*.ec"])
 

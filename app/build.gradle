@@ -94,9 +94,7 @@ sonarqube {
 //
         property "sonar.android.lint.report", "build/reports/lint-results-debug.xml"
 
-
-
-
+        property "sonar.exclusions", "**/R.class, **/R\$*.class, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*"
 
     }
 }
