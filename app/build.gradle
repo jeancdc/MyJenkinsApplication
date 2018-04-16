@@ -92,7 +92,7 @@ sonarqube {
         property "sonar.jacoco.reportPaths", fileTree(dir: project.projectDir, includes: ["build/jacoco/*.exec", "build/outputs/code-coverage/connected/*.ec"])
         property "sonar.junit.reportPaths", "build/test-results/testDebugUnitTest, build/outputs/androidTest-results/connected"
 //
-//        property "sonar.android.lint.report", "build/reports/lint-results-debug.xml"
+        property "sonar.android.lint.report", "build/reports/lint-results-debug.xml"
 
 
 
