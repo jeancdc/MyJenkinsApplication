@@ -53,13 +53,6 @@ sonarqube {
         property "sonar.modules.enabled", "true"
         property "sonar.modules", "app"
 
-        property "app.sonar.projectBaseDir", "app"
-//        property "android60.sonar.projectBaseDir", "abi/x86/density/xhdpi/locale/fr_FR/os/6.0/resolution/1080x1920/app"
-//        property "android71.sonar.projectBaseDir", "abi/google_apis/x86_64/density/xhdpi/locale/fr_FR/os/7.1/resolution/1080x1920/app"
-//
-//        property "android60.sonar.projectName", "My Jenkins Application under Android 6.0"
-//        property "android60.sonar.projectKey", "com.example.ay31281_dev.myjenkinsapplication_android6"
-
         property "sonar.java.coveragePlugin", "jacoco"
 
         property "sonar.exclusions", "**/R.class, **/R\$*.class, **/R.java, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*"
