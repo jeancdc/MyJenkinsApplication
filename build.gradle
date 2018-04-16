@@ -51,8 +51,12 @@ sonarqube {
         property 'sonar.sourceEncoding', "UTF-8"
 
         property "sonar.modules.enabled", "true"
-        property "sonar.modules", "app"
+        property "sonar.modules", "app, android60, android71, android80"
+
         property "app.sonar.projectBaseDir", "app"
+        property "android60.sonar.projectBaseDir", "abi/x86/density/xhdpi/locale/fr_FR/os/6.0/resolution/1080x1920/app"
+        property "android71.sonar.projectBaseDir", "abi/google_apis/x86_64/density/xhdpi/locale/fr_FR/os/7.1/resolution/1080x1920/app"
+        property "android80.sonar.projectBaseDir", "abi/google_apis/x86_64/density/xhdpi/locale/fr_FR/os/7.1/resolution/1080x1920/app"
 
         property "sonar.java.coveragePlugin", "jacoco"
 
