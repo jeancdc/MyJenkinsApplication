@@ -40,6 +40,7 @@ sonarqube {
 
         property "sonar.projectKey", "com.example.ay31281_dev.myjenkinsapplication"
         property "sonar.projectName", "My Jenkins Application"
+        property "sonar.projectVersion", ${project.version}
 
         property 'sonar.sourceEncoding', "UTF-8"
 
@@ -49,8 +50,7 @@ sonarqube {
 
         property "sonar.java.coveragePlugin", "jacoco"
 
-        //property "sonar.exclusions", "**/BuildConfig.class,**/R.java,**/R\$*.java,src/main/gen/**/*,src/main/assets/**/*"
-        //property "sonar.exclusions", "**/R.class, **/R\$*.class, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*"
+        property "sonar.exclusions", "**/R.class, **/R\$*.class, **/R.java, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*"
 
         //property "sonar.jacoco.reportPaths", fileTree(dir: project.projectDir, includes: ["build/jacoco/*.exec", "build/outputs/code-coverage/connected/*.ec"])
 
