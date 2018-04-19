@@ -20,45 +20,7 @@ android {
         debug {
             testCoverageEnabled true
         }
-        all { /*buildType ->
-
-            task "combineTest${buildType.name.capitalize()}Results"  {
-
-                group = "Reporting"
-                description = "Move the unit tests and instrumented tests of the ${buildType.name.capitalize()} variant in one directory only."
-
-                def modules = ["app"]
-
-                doLast {
-
-                    println("project: " + project.projectDir)
-                    println("project: " + project.version)
-
-                    modules.each { module ->
-                        File combined = file("${project.buildDir}/combined-test-results/${buildType.name}")
-                        if (combined.exists()) {
-                            combined.deleteDir()
-                        }
-                        combined.mkdirs();
-
-                        def testDirs = [file("${project.buildDir}/test-results/test${buildType.name.capitalize()}UnitTest/"),
-                                        file("${project.buildDir}/outputs/androidTest-results/connected/")];
-                        testDirs.each { testDir ->
-                            if (!testDir.exists()) {
-                                logging.captureStandardOutput LogLevel.WARN
-                                println "WARNING: ignoring non-existant ${testDir.path}"
-                                return;
-                            }
-                            files(testDir.listFiles()).each { file ->
-                                if (file.isFile()) {
-                                    new File(combined, file.getName()) << file.text
-                                }
-                            }
-                        }
-                    }
-                }
-
-            }*/
+        all {
         }
     }
     lintOptions {
@@ -66,7 +28,13 @@ android {
         abortOnError false      // if true, stop the gradle build if errors are found
         ignoreWarnings false    // if true, only report errors
     }
+
 }
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses true
+}
+
 
 sonarqube {
     properties {
