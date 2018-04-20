@@ -46,7 +46,7 @@ for(int i = 0; i < emulators.size(); i++) {
                     }
                     sh "$ADB emu kill"
                 }*/
-                echo "${emulator}"
+                echo emulator
             )
         }
     }
