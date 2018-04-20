@@ -1,5 +1,5 @@
 
-def emulators = ["Nexus_5X_API_25_7.1.1"]
+def myEmulators = ["Nexus_5X_API_25_7.1.1"]
 def tasks = [:]
 
 stage('Preparation') {
@@ -20,17 +20,17 @@ stage('Unit tests') {
     }
 }
 
-for(int i = 0; i < emulators.size(); i++) {
+for(int i = 0; i < myEmulators.size(); i++) {
 
-    def emulator = emulators[i]
+    def myEmulator = myEmulators[i]
 
-    tasks["${emulator}"] = {
+    tasks["${myEmulator}"] = {
 
-        node(emulator) {
+        node(myEmulator) {
 
             parallel (
                 /*launchEmulator: {
-                    sh "$ANDROID_HOME/emulator/emulator -avd ${emulator} -port 5555"
+                    sh "$ANDROID_HOME/emulator/emulator -avd ${myEmulator} -port 5555"
                 },
                 runAndroidTests: {
                     timeout(time: 60, unit: 'SECONDS') {
@@ -46,7 +46,9 @@ for(int i = 0; i < emulators.size(); i++) {
                     }
                     sh "$ADB emu kill"
                 }*/
-                echo "${emulator}"
+                echoEmulator: {
+                    echo "${myEmulator}"
+                }
             )
         }
     }
