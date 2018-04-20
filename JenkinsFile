@@ -29,7 +29,7 @@ for(int i = 0; i < emulators.size(); i++) {
         node(emulator) {
 
             parallel (
-                launchEmulator: {
+                /*launchEmulator: {
                     sh "$ANDROID_HOME/emulator/emulator -avd ${emulator} -port 5555"
                 },
                 runAndroidTests: {
@@ -45,7 +45,8 @@ for(int i = 0; i < emulators.size(); i++) {
                         throw e
                     }
                     sh "$ADB emu kill"
-                }
+                }*/
+                echo ${emulator}
             )
         }
     }
