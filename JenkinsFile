@@ -1,4 +1,4 @@
-node {
+/*node {
 
   try {
 
@@ -55,4 +55,53 @@ node {
     throw e
   }
 
+}*/
+
+def emulators = ["Nexus_5X_API_25_7.1.1"]
+def tasks = [:]
+
+stage('Preparation') {
+    git branch: 'master', url: 'git@github.com:jeancdc/MyJenkinsApplication.git'
 }
+
+stage('Build') {
+    sh './gradlew clean assembleDebug'
+}
+
+stage('Unit tests') {
+    sh './gradlew testDebugUnitTest '
+}
+
+for(int i = 0; i < emulators.size(); i++) {
+
+    tasks["${emulators[i]}"] = {
+
+        node(emulators[i]) {
+
+            parallel (
+                launchEmulator: {
+                    sh '$ANDROID_HOME/emulator/emulator -avd "${emulators[i]}" -port 5555'
+                },
+                runAndroidTests: {
+                    timeout(time: 60, unit: 'SECONDS') {
+                        sh "$ADB -s emulator-5555 wait-for-device"
+                    }
+                    echo "Device(s) is ready"
+                    //h "$ADB -s emulator-5555 shell wm dismiss-keyguard"
+                    //sh "$ADB -s emulator-5555 shell input keyevent 3"
+                    try {
+                        sh './gradlew connectedDebugAndroidTest createDebugCoverageReport'
+                    } catch(e) {
+                        throw e
+                    }
+                    sh "$ADB emu kill"
+                }
+            )
+        }
+    }
+}
+
+stage('Instrumented tests') {
+    parallel tasks
+}
+
