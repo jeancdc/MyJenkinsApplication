@@ -33,7 +33,7 @@ for(int i = 0; i < myEmulators.size(); i++) {
                 launchEmulator: {
                     sh "$ANDROID_HOME/emulator/emulator -avd ${myEmulator} -port 5555"
                 },
-                
+
                 runAndroidTests: {
                     timeout(time: 60, unit: 'SECONDS') {
                         sh "$ADB -s emulator-5555 wait-for-device"
@@ -57,7 +57,18 @@ stage('Instrumented tests') {
     parallel tasks
 }
 
+stage('Lint') {
+    sh './gradlew lintDebug'
+}
+
 stage('Results') {
-    echo "Results!"
+    junit '**/build/test-results/testDebugUnitTest/*.xml, **/build/outputs/androidTest-results/connected/*.xml'
+    jacoco(
+        execPattern: '**/**.exec, **/**.ec',
+        classPattern: '**/classes',
+        sourcePattern: '**/src/main/java',
+        exclusionPattern: '**/R.class, **/R$*.class, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*'
+        )
+    androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/build/reports/lint-results-debug.xml', unHealthy: ''
 }
 
