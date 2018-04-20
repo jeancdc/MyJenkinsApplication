@@ -56,6 +56,7 @@ for(int i = 0; i < myEmulators.size(); i++) {
 }
 
 stage('Instrumented tests') {
+    echo "${tasks[0]}"
     parallel tasks
 }
 
