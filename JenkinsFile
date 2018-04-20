@@ -30,7 +30,7 @@ for(int i = 0; i < myEmulators.size(); i++) {
 
             parallel (
                 echoEmulator: {
-                    echo "Hello, emulator!"
+                    echo "${myEmulator}"
                 }
                 /*launchEmulator: {
                     sh "$ANDROID_HOME/emulator/emulator -avd ${myEmulator} -port 5555"
