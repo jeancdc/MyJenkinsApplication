@@ -28,6 +28,8 @@ for(int i = 0; i < myEmulators.size(); i++) {
 
         node(myEmulator) {
 
+            echo "${myEmulator}"
+
             parallel (
                 /*launchEmulator: {
                     sh "$ANDROID_HOME/emulator/emulator -avd ${myEmulator} -port 5555"
@@ -46,9 +48,6 @@ for(int i = 0; i < myEmulators.size(); i++) {
                     }
                     sh "$ADB emu kill"
                 }*/
-                echoEmulator: {
-                    echo "${myEmulator}"
-                }
             )
         }
     }
