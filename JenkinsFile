@@ -22,7 +22,7 @@ stage('Unit tests') {
 
 for(int i = 0; i < emulators.size(); i++) {
 
-    def emulator = emulator[i]
+    def emulator = emulators[i]
 
     tasks["${emulator}"] = {
 
@@ -46,7 +46,7 @@ for(int i = 0; i < emulators.size(); i++) {
                     }
                     sh "$ADB emu kill"
                 }*/
-                echo emulator
+                echo "${emulator}"
             )
         }
     }
