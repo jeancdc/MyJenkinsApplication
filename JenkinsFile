@@ -26,7 +26,7 @@ for(int i = 0; i < myEmulators.size(); i++) {
 
     tasks["${myEmulator}"] = {
 
-        node(myEmulator) {
+        node {
 
             parallel (
                 echoEmulator: {
