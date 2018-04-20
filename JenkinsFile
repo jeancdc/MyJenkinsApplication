@@ -72,5 +72,8 @@ for(int i = 0; i < myEmulators.size(); i++) {
     }
 }
 
+stage('Instrumented tests') {
+    parallel tasks
+}
 
 
