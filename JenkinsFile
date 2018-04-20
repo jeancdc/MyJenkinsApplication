@@ -1,0 +1,58 @@
+node {
+
+  try {
+
+    stage('Preparation') {
+      git branch: 'master', url: 'git@github.com:jeancdc/MyJenkinsApplication.git'
+    }
+    stage('Build') {
+      sh './gradlew clean assembleDebug'
+    }
+    stage('Unit tests') {
+      sh './gradlew testDebugUnitTest '
+    }
+    stage('Instrumented tests') {
+      sh "$ADB start-server"
+
+      parallel (
+        launchEmulator: {
+          sh '$ANDROID_HOME/emulator/emulator -avd Nexus_5X_API_25_7.1.1 -port 5555'
+          //sh '$ANDROID_HOME/emulator/emulator -avd Galaxy_Nexus_API_18_Jelly_Bean -port 5556'
+
+            //sh '$ANDROID_HOME/emulator/emulator -skin 1080x1920 -port 5720 -prop persist.sys.language=fr -prop persist.sys.country=FR -avd hudson_fr-FR_320_1080x1920_android-25_google_apis-x86_64 -wipe-data'
+        },
+        runAndroidTests: {
+          timeout(time: 60, unit: 'SECONDS') {
+            sh "$ADB -s emulator-5555 wait-for-device"
+            //sh "$ADB -s emulator-5556 wait-for-device"
+          }
+          echo "Device(s) is ready"
+          //h "$ADB -s emulator-5555 shell wm dismiss-keyguard"
+          //sh "$ADB -s emulator-5555 shell input keyevent 3"
+          try {
+            sh './gradlew connectedDebugAndroidTest createDebugCoverageReport'
+          } catch(e) {
+            throw e
+          }
+          sh "$ADB emu kill"
+        }
+      )
+    }
+    stage('Lint') {
+        sh './gradlew lintDebug'
+    }
+    stage('Results') {
+      junit '**/build/test-results/testDebugUnitTest/*.xml, **/build/outputs/androidTest-results/connected/*.xml'
+      jacoco(
+        execPattern: '**/**.exec, **/**.ec',
+        classPattern: '**/classes',
+        sourcePattern: '**/src/main/java',
+        exclusionPattern: '**/R.class, **/R$*.class, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*'
+      )
+      androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/build/reports/lint-results-debug.xml', unHealthy: ''
+    }
+  } catch(e) {
+    throw e
+  }
+
+}
