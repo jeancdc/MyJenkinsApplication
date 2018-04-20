@@ -3,15 +3,21 @@ def emulators = ["Nexus_5X_API_25_7.1.1"]
 def tasks = [:]
 
 stage('Preparation') {
-    git branch: 'master', url: 'git@github.com:jeancdc/MyJenkinsApplication.git'
+    node {
+        git branch: 'master', url: 'git@github.com:jeancdc/MyJenkinsApplication.git'
+    }
 }
 
 stage('Build') {
-    sh './gradlew clean assembleDebug'
+    node {
+        sh './gradlew clean assembleDebug'
+    }
 }
 
 stage('Unit tests') {
-    sh './gradlew testDebugUnitTest '
+    node {
+        sh './gradlew testDebugUnitTest'
+    }
 }
 
 for(int i = 0; i < emulators.size(); i++) {
@@ -45,5 +51,9 @@ for(int i = 0; i < emulators.size(); i++) {
 
 stage('Instrumented tests') {
     parallel tasks
+}
+
+stage('Results') {
+    echo "Results!"
 }
 
