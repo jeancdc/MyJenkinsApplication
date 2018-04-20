@@ -24,6 +24,8 @@ for(int i = 0; i < myEmulators.size(); i++) {
 
     def myEmulator = myEmulators[i]
 
+    echo "${myEmulator}"
+
     tasks["${myEmulator}"] = {
 
         node(myEmulator) {
@@ -39,7 +41,7 @@ for(int i = 0; i < myEmulators.size(); i++) {
                         sh "$ADB -s emulator-5555 wait-for-device"
                     }
                     echo "Device(s) is ready"
-                    //h "$ADB -s emulator-5555 shell wm dismiss-keyguard"
+                    //sh "$ADB -s emulator-5555 shell wm dismiss-keyguard"
                     //sh "$ADB -s emulator-5555 shell input keyevent 3"
                     try {
                         sh './gradlew connectedDebugAndroidTest createDebugCoverageReport'
