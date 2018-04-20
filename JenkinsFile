@@ -22,13 +22,15 @@ stage('Unit tests') {
 
 for(int i = 0; i < emulators.size(); i++) {
 
-    tasks["${emulators[i]}"] = {
+    def emulator = emulator[i]
 
-        node(emulators[i]) {
+    tasks["${emulator}"] = {
+
+        node(emulator) {
 
             parallel (
                 launchEmulator: {
-                    sh "$ANDROID_HOME/emulator/emulator -avd ${emulators[i]} -port 5555"
+                    sh "$ANDROID_HOME/emulator/emulator -avd ${emulator} -port 5555"
                 },
                 runAndroidTests: {
                     timeout(time: 60, unit: 'SECONDS') {
