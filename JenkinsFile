@@ -24,15 +24,14 @@ for(int i = 0; i < myEmulators.size(); i++) {
 
     def myEmulator = myEmulators[i]
 
-    echo "${myEmulator}"
-
     tasks["${myEmulator}"] = {
 
         node(myEmulator) {
 
-            echo "${myEmulator}"
-
             parallel (
+                echoEmulator: {
+                    echo "Hello, emulator!"
+                }
                 /*launchEmulator: {
                     sh "$ANDROID_HOME/emulator/emulator -avd ${myEmulator} -port 5555"
                 },
@@ -56,7 +55,6 @@ for(int i = 0; i < myEmulators.size(); i++) {
 }
 
 stage('Instrumented tests') {
-    echo "${tasks[1]}"
     parallel tasks
 }
 
