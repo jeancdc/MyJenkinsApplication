@@ -13,7 +13,7 @@ for(int i=0; i< axisNode.size(); i++) {
     for(int j=0; j< axisTool.size(); j++) {
         def axisToolValue = axisTool[j]
         tasks["${axisNodeValue}/${axisToolValue}"] = {
-            node(axisNodeValue) {
+            node {
                 def javaHome = tool axisToolValue
                 println "Node=${env.NODE_NAME}"
                 println "Java=${javaHome}"
