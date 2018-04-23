@@ -59,18 +59,22 @@ stage('Instrumented tests') {
 }
 
 stage('Lint') {
-    sh './gradlew lintDebug'
+    node {
+        sh './gradlew lintDebug'
+    }
 }
 
 stage('Results') {
-    junit '**/build/test-results/testDebugUnitTest/*.xml, **/build/outputs/androidTest-results/connected/*.xml'
-    jacoco(
-        execPattern: '**/**.exec, **/**.ec',
-        classPattern: '**/classes',
-        sourcePattern: '**/src/main/java',
-        exclusionPattern: '**/R.class, **/R$*.class, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*'
+    node {
+        junit '**/build/test-results/testDebugUnitTest/*.xml, **/build/outputs/androidTest-results/connected/*.xml'
+        jacoco(
+                execPattern: '**/**.exec, **/**.ec',
+                classPattern: '**/classes',
+                sourcePattern: '**/src/main/java',
+                exclusionPattern: '**/R.class, **/R$*.class, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*'
         )
-    androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/build/reports/lint-results-debug.xml', unHealthy: ''
+        androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/build/reports/lint-results-debug.xml', unHealthy: ''
+    }
 }
 
 
