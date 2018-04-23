@@ -36,13 +36,14 @@ for(int i = 0; i < myEmulators.size(); i++) {
                     sh "$ANDROID_HOME/emulator/emulator -avd ${myEmulator} -port ${port} &"
                 },
 
-                waitForDevice: {
+                launchAndroidTests: {
                     timeout(time: 60, unit: 'SECONDS') {
                         sh "$ADB -s emulator-${port} wait-for-device"
                     }
                     echo "Device(s) is (are) ready"
                     //sh "$ADB -s emulator-5555 shell wm dismiss-keyguard"
                     //sh "$ADB -s emulator-5555 shell input keyevent 3"
+                    sh './gradlew connectedDebugAndroidTest'
                 }
 
             )
