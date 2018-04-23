@@ -47,25 +47,7 @@ for(int i = 0; i < myEmulators.size(); i++) {
                         throw e
                     }
                     sh "$ADB emu kill"
-                },
-
-                generateLint: {
-                    sh './gradlew lintDebug'
-                },
-
-                generateResults: {
-                    junit '**/build/test-results/testDebugUnitTest/*.xml, **/build/outputs/androidTest-results/connected/*.xml'
-                            jacoco(
-                                execPattern: '**/**.exec, **/**.ec',
-                                classPattern: '**/classes',
-                                sourcePattern: '**/src/main/java',
-                                exclusionPattern: '**/R.class, **/R$*.class, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*'
-                                )
-                            androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/build/reports/lint-results-debug.xml', unHealthy: ''
                 }
-
-
-
 
             )
         }
@@ -74,6 +56,21 @@ for(int i = 0; i < myEmulators.size(); i++) {
 
 stage('Instrumented tests') {
     parallel tasks
+}
+
+stage('Lint') {
+    sh './gradlew lintDebug'
+}
+
+stage('Results') {
+    junit '**/build/test-results/testDebugUnitTest/*.xml, **/build/outputs/androidTest-results/connected/*.xml'
+    jacoco(
+        execPattern: '**/**.exec, **/**.ec',
+        classPattern: '**/classes',
+        sourcePattern: '**/src/main/java',
+        exclusionPattern: '**/R.class, **/R$*.class, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*'
+        )
+    androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/build/reports/lint-results-debug.xml', unHealthy: ''
 }
 
 
