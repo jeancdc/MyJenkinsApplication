@@ -30,6 +30,9 @@ for(int i = 0; i < myEmulators.size(); i++) {
     def myEmulator = myEmulators[i]
     def port = basePort + (i * 2)
 
+    echo "my emulator: ${myEmulator}"
+    echo "port: ${port}"
+
     tasks["${myEmulator}"] {
 
         node(myEmulator) {
