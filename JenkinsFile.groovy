@@ -1,5 +1,5 @@
 
-def myEmulators = ["Nexus_5X_API_25_7.1.1", "Galaxy_Nexus_API_18_Jelly_Bean"]
+def myEmulators = ["Nexus_5X_API_25_7.1.1"]
 def tasks = [:]
 def basePort = 5555
 
