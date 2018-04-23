@@ -5,21 +5,21 @@ def basePort = 5555
 
 stage('Preparation') {
     node {
-        echo "get project from Github"
+        echo "Get the project from the Github repository"
         git branch: 'master', url: 'git@github.com:jeancdc/MyJenkinsApplication.git'
     }
 }
 
 stage('Build') {
     node {
-        echo "clean project and assemble"
+        echo "Clean the project and assemble"
         sh './gradlew clean assembleDebug'
     }
 }
 
 stage('Unit tests') {
     node {
-        echo "execute JUnit tests"
+        echo "Execute the JUnit tests"
         sh './gradlew testDebugUnitTest'
     }
 }
@@ -27,7 +27,7 @@ stage('Unit tests') {
 stage('Instrumented tests') {
 
     node {
-        echo "launching emulators"
+        echo "Launch the emulators"
 
         for(int i = 0; i < myEmulators.size(); i++) {
             def myEmulator = myEmulators[i]
@@ -40,10 +40,10 @@ stage('Instrumented tests') {
             echo "AVD ${myEmulator} is now ready."
         }
 
-        echo "execute instrumented tests"
+        echo "Execute the instrumented tests"
         sh './gradlew connectedDebugAndroidTest'
 
-        echo "close the emulators"
+        echo "Close the emulators"
         for(int i = 0; i < myEmulators.size(); i++) {
             def port = basePort + (i * 2)
             sh "$ADB -s emulator-${port} emu kill"
@@ -53,14 +53,14 @@ stage('Instrumented tests') {
 
 stage('Lint') {
     node {
-        echo "execute Lint report"
+        echo "Execute the Lint report"
         sh './gradlew lintDebug'
     }
 }
 
 stage('Results') {
     node {
-        echo "assemble reports"
+        echo "Publish the reports"
         junit '**/build/test-results/testDebugUnitTest/*.xml, **/build/outputs/androidTest-results/connected/*.xml'
         jacoco(
                 execPattern: '**/**.exec, **/**.ec',
