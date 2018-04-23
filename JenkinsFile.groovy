@@ -24,7 +24,7 @@ stage('Unit tests') {
 for(int i = 0; i < myEmulators.size(); i++) {
 
     def myEmulator = myEmulators[i]
-    def port = basePort + 1
+    def port = basePort + i
 
     tasks["${myEmulator}"] = {
 
