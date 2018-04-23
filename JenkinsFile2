@@ -1,3 +1,4 @@
+#!groovy​
 
 def myEmulators = ["Nexus_5X_API_25_7.1.1", "Galaxy_Nexus_API_18_Jelly_Bean"]
 def tasks = [:]
@@ -35,7 +36,7 @@ for(int i = 0; i < myEmulators.size(); i++) {
 
     tasks["${myEmulator}"] = {
 
-        node(myEmulator) {
+        node {
 
             sh "$ANDROID_HOME/emulator/emulator -avd ${myEmulator} -port ${port} &"
             timeout(time: 60, unit: 'SECONDS') {
