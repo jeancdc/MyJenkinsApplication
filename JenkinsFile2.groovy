@@ -27,10 +27,10 @@ stage('Unit tests') {
 
 for(int i = 0; i < myEmulators.size(); i++) {
 
-    tasks["${myEmulator}"] {
+    def myEmulator = myEmulators[i]
+    def port = basePort + (i * 2)
 
-        def myEmulator = myEmulators[i]
-        def port = basePort + (i * 2)
+    tasks["${myEmulator}"] {
 
         node(myEmulator) {
 
