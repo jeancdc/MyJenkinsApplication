@@ -47,7 +47,7 @@ stage('Instrumented tests') {
     node {
         echo "execute instrumented tests"
 
-        sh './gradlew connectedDebugAndroidTest createDebugCoverageReport'
+        sh './gradlew connectedDebugAndroidTest'
     }
 }
 
