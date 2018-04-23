@@ -24,32 +24,60 @@ stage('Unit tests') {
     }
 }
 
-stage('Instrumented tests') {
 
-    node {
-        echo "Launch the emulators"
+for(int i = 0; i < myEmulators.size(); i++) {
 
-        for(int i = 0; i < myEmulators.size(); i++) {
-            def myEmulator = myEmulators[i]
-            def port = basePort + (i * 2)
+    tasks["${myEmulator}"] {
+
+        def myEmulator = myEmulators[i]
+        def port = basePort + (i * 2)
+
+        node(myEmulator) {
 
             sh "$ANDROID_HOME/emulator/emulator -avd ${myEmulator} -port ${port} &"
             timeout(time: 60, unit: 'SECONDS') {
                 sh "$ADB -s emulator-${port} wait-for-device"
             }
             echo "AVD ${myEmulator} is now ready."
-        }
 
-        echo "Execute the instrumented tests"
-        sh './gradlew connectedDebugAndroidTest'
+            echo "Execute the instrumented tests"
+            sh './gradlew connectedDebugAndroidTest'
 
-        echo "Close the emulators"
-        for(int i = 0; i < myEmulators.size(); i++) {
-            def port = basePort + (i * 2)
             sh "$ADB -s emulator-${port} emu kill"
         }
     }
 }
+
+stage('Instrumented tests') {
+    parallel tasks
+}
+
+//stage('Instrumented tests') {
+//
+//    node {
+//        echo "Launch the emulators"
+//
+//        for(int i = 0; i < myEmulators.size(); i++) {
+//            def myEmulator = myEmulators[i]
+//            def port = basePort + (i * 2)
+//
+//            sh "$ANDROID_HOME/emulator/emulator -avd ${myEmulator} -port ${port} &"
+//            timeout(time: 60, unit: 'SECONDS') {
+//                sh "$ADB -s emulator-${port} wait-for-device"
+//            }
+//            echo "AVD ${myEmulator} is now ready."
+//        }
+//
+//        echo "Execute the instrumented tests"
+//        sh './gradlew connectedDebugAndroidTest'
+//
+//        echo "Close the emulators"
+//        for(int i = 0; i < myEmulators.size(); i++) {
+//            def port = basePort + (i * 2)
+//            sh "$ADB -s emulator-${port} emu kill"
+//        }
+//    }
+//}
 
 stage('Lint') {
     node {
