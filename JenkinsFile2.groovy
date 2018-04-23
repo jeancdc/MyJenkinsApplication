@@ -11,48 +11,32 @@ stage('Preparation') {
 
 stage('Build') {
     node {
+        echo "clean project and assemble"
         sh './gradlew clean assembleDebug'
     }
 }
 
 stage('Unit tests') {
     node {
+        echo "execute JUnit tests"
         sh './gradlew testDebugUnitTest'
-    }
-}
-
-for(int i = 0; i < myEmulators.size(); i++) {
-
-    def myEmulator = myEmulators[i]
-    def port = basePort + (i * 2)
-
-    tasks["${myEmulator}"] = {
-
-        node {
-
-            sh "$ANDROID_HOME/emulator/emulator -avd ${myEmulator} -port ${port} &"
-
-            timeout(time: 60, unit: 'SECONDS') {
-                sh "$ADB -s emulator-${port} wait-for-device"
-            }
-            echo "Device(s) is (are) ready"
-        }
     }
 }
 
 stage('Launch emulators') {
 
     node {
+        echo "launching emulators"
 
         for(int i = 0; i < myEmulators.size(); i++) {
             def myEmulator = myEmulators[i]
             def port = basePort + (i * 2)
 
             sh "$ANDROID_HOME/emulator/emulator -avd ${myEmulator} -port ${port} &"
-            timeout(time: 60, unit: 'SECONDS') {
+            /*timeout(time: 60, unit: 'SECONDS') {
                 sh "$ADB -s emulator-${port} wait-for-device"
             }
-            echo "AVD ${myEmulator} is now ready."
+            echo "AVD ${myEmulator} is now ready."*/
         }
     }
 }
