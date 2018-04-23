@@ -24,7 +24,7 @@ stage('Unit tests') {
     }
 }
 
-stage('Launch emulators') {
+stage('Instrumented tests') {
 
     node {
         echo "launching emulators"
@@ -38,19 +38,21 @@ stage('Launch emulators') {
                 sh "$ADB -s emulator-${port} wait-for-device"
             }
             echo "AVD ${myEmulator} is now ready."
-            sh './gradlew connectedDebugAndroidTest'
         }
-    }
-}
 
-stage('Instrumented tests') {
-
-    node {
         echo "execute instrumented tests"
-
-        //sh './gradlew connectedDebugAndroidTest'
+        sh './gradlew connectedDebugAndroidTest'
     }
 }
+
+//stage('Instrumented tests') {
+//
+//    node {
+//        echo "execute instrumented tests"
+//
+//        sh './gradlew connectedDebugAndroidTest'
+//    }
+//}
 
 //stage('Lint') {
 //    node {
