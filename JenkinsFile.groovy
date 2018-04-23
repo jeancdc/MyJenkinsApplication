@@ -51,7 +51,7 @@ for(int i = 0; i < myEmulators.size(); i++) {
 }
 
 stage('Launch emulators') {
-    tasks
+    parallel tasks
 }
 
 stage('Instrumented tests') {
