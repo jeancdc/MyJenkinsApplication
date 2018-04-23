@@ -44,16 +44,21 @@ for(int i = 0; i < myEmulators.size(); i++) {
             }
             echo "AVD ${myEmulator} is now ready."
 
-            echo "Execute the instrumented tests"
-            sh './gradlew connectedDebugAndroidTest'
 
-            sh "$ADB -s emulator-${port} emu kill"
         }
     }
 }
 
 stage('Instrumented tests') {
     parallel tasks
+
+    echo "Execute the instrumented tests"
+    sh './gradlew connectedDebugAndroidTest'
+
+    for(int i = 0; i < myEmulators.size(); i++) {
+        def port = basePort + (i * 2)
+        sh "$ADB -s emulator-${port} emu kill"
+    }
 }
 
 //stage('Instrumented tests') {
