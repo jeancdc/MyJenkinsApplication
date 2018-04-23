@@ -43,7 +43,7 @@ stage('Instrumented tests') {
         echo "execute instrumented tests"
         sh './gradlew connectedDebugAndroidTest'
 
-        sh "$ADB emu kill"
+        sh "$ADB -s emu kill"
     }
 }
 
