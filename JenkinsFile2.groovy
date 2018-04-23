@@ -33,10 +33,10 @@ stage('Launch emulators') {
             def port = basePort + (i * 2)
 
             sh "$ANDROID_HOME/emulator/emulator -avd ${myEmulator} -port ${port} &"
-            /*timeout(time: 60, unit: 'SECONDS') {
+            timeout(time: 60, unit: 'SECONDS') {
                 sh "$ADB -s emulator-${port} wait-for-device"
             }
-            echo "AVD ${myEmulator} is now ready."*/
+            echo "AVD ${myEmulator} is now ready."
         }
     }
 }
