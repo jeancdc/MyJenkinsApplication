@@ -1,5 +1,5 @@
 
-def myEmulators = ["Nexus_5X_API_25_7.1.1"]
+def myEmulators = ["Nexus_5X_API_25_7.1.1", "Galaxy_Nexus_API_18_Jelly_Bean"]
 def tasks = [:]
 def basePort = 5555
 
@@ -24,7 +24,7 @@ stage('Unit tests') {
 for(int i = 0; i < myEmulators.size(); i++) {
 
     def myEmulator = myEmulators[i]
-    def port = basePort + i
+    def port = basePort + i + 1
 
     tasks["${myEmulator}"] = {
 
@@ -33,7 +33,7 @@ for(int i = 0; i < myEmulators.size(); i++) {
             parallel (
 
                 launchEmulator: {
-                    sh "$ANDROID_HOME/emulator/emulator -avd ${myEmulator} -port ${port}"
+                    sh "$ANDROID_HOME/emulator/emulator -avd ${myEmulator} -port ${port} &"
                 },
 
                 runAndroidTests: {
