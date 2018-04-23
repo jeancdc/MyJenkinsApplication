@@ -33,7 +33,7 @@ for(int i = 0; i < myEmulators.size(); i++) {
     echo "my emulator: ${myEmulator}"
     echo "port: ${port}"
 
-    tasks["${myEmulator}"] {
+    tasks["${myEmulator}"] = {
 
         node(myEmulator) {
 
