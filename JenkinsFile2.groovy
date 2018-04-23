@@ -51,35 +51,26 @@ stage('Instrumented tests') {
     }
 }
 
-//stage('Instrumented tests') {
-//
-//    node {
-//        echo "execute instrumented tests"
-//
-//        sh './gradlew connectedDebugAndroidTest'
-//    }
-//}
+stage('Lint') {
+    node {
+        echo "execute Lint report"
+        sh './gradlew lintDebug'
+    }
+}
 
-//stage('Lint') {
-//    node {
-//        echo "execute Lint report"
-//        sh './gradlew lintDebug'
-//    }
-//}
-//
-//stage('Results') {
-//    node {
-//        echo "assemble reports"
-//        junit '**/build/test-results/testDebugUnitTest/*.xml, **/build/outputs/androidTest-results/connected/*.xml'
-//        jacoco(
-//                execPattern: '**/**.exec, **/**.ec',
-//                classPattern: '**/classes',
-//                sourcePattern: '**/src/main/java',
-//                exclusionPattern: '**/R.class, **/R$*.class, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*'
-//        )
-//        androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/build/reports/lint-results-debug.xml', unHealthy: ''
-//    }
-//}
+stage('Results') {
+    node {
+        echo "assemble reports"
+        junit '**/build/test-results/testDebugUnitTest/*.xml, **/build/outputs/androidTest-results/connected/*.xml'
+        jacoco(
+                execPattern: '**/**.exec, **/**.ec',
+                classPattern: '**/classes',
+                sourcePattern: '**/src/main/java',
+                exclusionPattern: '**/R.class, **/R$*.class, **/BuildConfig.*, **/Manifest*.*, **/*Test*.*'
+        )
+        androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/build/reports/lint-results-debug.xml', unHealthy: ''
+    }
+}
 
 
 
