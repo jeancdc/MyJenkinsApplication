@@ -41,5 +41,14 @@ stage('Launch emulators') {
     }
 }
 
+stage('Instrumented tests') {
+
+    node {
+        echo "execute instrumented tests"
+
+        sh './gradlew connectedDebugAndroidTest'
+    }
+}
+
 
 
