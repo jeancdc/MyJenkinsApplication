@@ -37,7 +37,7 @@ for(int i = 0; i < myEmulators.size(); i++) {
 
                 runAndroidTests: {
                     timeout(time: 60, unit: 'SECONDS') {
-                        sh "$ADB -s emulator-${port} wait-for-device"
+                        sh "$ADB -s emulator-${port + i} wait-for-device"
                     }
                     echo "Device(s) is ready"
                     //sh "$ADB -s emulator-5555 shell wm dismiss-keyguard"
