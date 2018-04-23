@@ -43,6 +43,7 @@ stage('Instrumented tests') {
         echo "execute instrumented tests"
         sh './gradlew connectedDebugAndroidTest'
 
+        echo "close the emulators"
         for(int i = 0; i < myEmulators.size(); i++) {
             def port = basePort + (i * 2)
             sh "$ADB -s emulator-${port} emu kill"
